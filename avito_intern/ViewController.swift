@@ -11,7 +11,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var companies = Array<AvitoData>()
+    var dataArray = Array<AvitoData>()
     let cellIdentifier = "TableViewCell"
     
     var session: URLSession!
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
                 print("Can't parse companies")
                 return
             }
-            self?.companies.append(data)
+            self?.dataArray.append(data)
             DispatchQueue.main.async { [weak self] in
                 self?.tableView.reloadData()
             }
@@ -55,13 +55,23 @@ class ViewController: UIViewController {
 
 
 extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        self.dataArray[section].company.name
+    }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "TableViewHeader") as? TableViewHeader else {
+            return UITableViewHeaderFooterView()
+        }
+        header.setup(title: self.dataArray[section].company.name)
+        return header
+    }
 }
 
 
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.companies[section].company.employees.count
+        self.dataArray[section].company.employees.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -69,11 +79,11 @@ extension ViewController: UITableViewDataSource {
             print("return default cell!")
             return UITableViewCell()
         }
-        cell.setup(employee: self.companies[indexPath.section].company.employees[indexPath.row])
+        cell.setup(employee: self.dataArray[indexPath.section].company.employees[indexPath.row])
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        self.companies.count
+        self.dataArray.count
     }
 }

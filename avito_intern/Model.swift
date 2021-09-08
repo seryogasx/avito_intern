@@ -13,24 +13,11 @@ struct AvitoData: Codable {
 
 struct Company: Codable {
     var name: String
-    var employees: [Employee] {
-        didSet {
-            employees.sort()
-        }
-    }
+    var employees: [Employee]
 }
 
-// MARK: Don't sort by name!
-struct Employee: Codable, Comparable {
+struct Employee: Codable {
     var name: String
     var phone_number: String
-    var skills: [String] {
-        didSet {
-            skills.sort()
-        }
-    }
-    
-    static func < (lhs: Employee, rhs: Employee) -> Bool {
-        return lhs.name < rhs.name
-    }
+    var skills: [String]
 }
