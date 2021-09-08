@@ -7,13 +7,30 @@
 
 import Foundation
 
-struct Company: Codable {
-    var name: String
-    var employees: [Employee]
+struct AvitoData: Codable {
+    var company: Company
 }
 
-struct Employee: Codable {
+struct Company: Codable {
+    var name: String
+    var employees: [Employee] {
+        didSet {
+            employees.sort()
+        }
+    }
+}
+
+// MARK: Don't sort by name!
+struct Employee: Codable, Comparable {
     var name: String
     var phone_number: String
-    var skills: [String]
+    var skills: [String] {
+        didSet {
+            skills.sort()
+        }
+    }
+    
+    static func < (lhs: Employee, rhs: Employee) -> Bool {
+        return lhs.name < rhs.name
+    }
 }
