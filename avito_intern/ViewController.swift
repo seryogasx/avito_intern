@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var dataArray = Array<AvitoData>()
     let cellIdentifier = "TableViewCell"
@@ -18,6 +19,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.backgroundView = activityIndicator
+        activityIndicator.hidesWhenStopped = true
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
@@ -29,8 +33,17 @@ class ViewController: UIViewController {
         
         self.getData()
     }
+    
+    private func showAlert(title: String, message: String) {
+        DispatchQueue.main.async { [weak self] in
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self?.present(alert, animated: true, completion: nil)
+        }
+    }
 
     private func getData() {
+        self.activityIndicator.startAnimating()
         guard let url = URL(string: "https://run.mocky.io/v3/1d1cb4ec-73db-4762-8c4b-0b8aa3cecd4c") else {
             print("Wrong url!")
             return
@@ -38,6 +51,11 @@ class ViewController: UIViewController {
         self.session.dataTask(with: url) { [weak self] (data, response, error) in
             guard error == nil, let data = data else {
                 print("Error detected! Cannot get data! \(error?.localizedDescription ?? "Empty description")")
+                self?.showAlert(title: "Bad internet", message: "Reconnect avery 5 sesonds")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { [weak self] in
+                    self?.activityIndicator.stopAnimating()
+                    self?.getData()
+                }
                 return
             }
             
@@ -48,6 +66,7 @@ class ViewController: UIViewController {
             self?.dataArray.append(data)
             DispatchQueue.main.async { [weak self] in
                 self?.tableView.reloadData()
+                self?.activityIndicator.stopAnimating()
             }
         }.resume()
     }

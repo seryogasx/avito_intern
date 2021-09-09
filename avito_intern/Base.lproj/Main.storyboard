@@ -17,6 +17,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="V2G-PX-P7v">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="na6-Ra-ONo">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -38,10 +41,13 @@
                             <constraint firstItem="na6-Ra-ONo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="2eO-GO-DAr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="na6-Ra-ONo" secondAttribute="trailing" id="4X7-Lx-pxh"/>
                             <constraint firstItem="na6-Ra-ONo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MnX-Tb-NpW"/>
+                            <constraint firstItem="V2G-PX-P7v" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="oCH-bc-HGH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="na6-Ra-ONo" secondAttribute="bottom" id="rcX-jV-1we"/>
+                            <constraint firstItem="V2G-PX-P7v" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vob-Ra-hUX"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="V2G-PX-P7v" id="Q7L-ky-cRf"/>
                         <outlet property="tableView" destination="na6-Ra-ONo" id="abb-QG-8tI"/>
                     </connections>
                 </viewController>
