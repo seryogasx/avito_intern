@@ -20,6 +20,6 @@ class TableViewCell: UITableViewCell {
     func setup(employee: Employee) {
         self.employeeNameLabel.text = employee.name
         self.employeePhoneNumberLabel.text = employee.phone_number
-        self.employeeSkillsLabel.text = employee.skills.sorted().joined(separator: ", ")
+        self.employeeSkillsLabel.text = employee.skills.sorted { $0.lowercased() < $1.lowercased() } .joined(separator: ", ")
     }
 }

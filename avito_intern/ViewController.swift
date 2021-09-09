@@ -64,6 +64,7 @@ class ViewController: UIViewController {
                 return
             }
             self?.dataArray.append(data)
+            self?.dataArray[0].company.employees.sort { $0.name.lowercased() < $1.name.lowercased() }
             DispatchQueue.main.async { [weak self] in
                 self?.tableView.reloadData()
                 self?.activityIndicator.stopAnimating()
