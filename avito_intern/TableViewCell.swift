@@ -11,36 +11,43 @@ class TableViewCell: UITableViewCell {
 
     @IBOutlet weak var employeeNameLabel: UILabel!
     @IBOutlet weak var employeePhoneNumberLabel: UILabel!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView! {
+        didSet {
+            self.collectionView.delegate = self
+            self.collectionView.dataSource = self
+        }
+    }
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     
     var skills: [String] = []
     var collectionViewCellIdentifier: String = "CollectionViewCell"
-    let textHeight: CGFloat = 22.0
+    let fontHeight: CGFloat = 22.0
     
     override func awakeFromNib() {
         super.awakeFromNib()
-     
-        self.collectionView.alwaysBounceVertical = false
+
         let layout = GridLayout()
         layout.delegate = self
         self.collectionView.collectionViewLayout = layout
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
+        self.collectionView.alwaysBounceVertical = false
         self.collectionView.register(UINib(nibName: collectionViewCellIdentifier, bundle: nil), forCellWithReuseIdentifier: collectionViewCellIdentifier)
     }
     
     func setup(employee: Employee) {
+        self.collectionView.collectionViewLayout.invalidateLayout()
         self.employeeNameLabel.text = "Name: \(employee.name)"
         self.employeePhoneNumberLabel.text = "Phone number: \(employee.phone_number)"
         self.skills = employee.skills.sorted { $0.lowercased() < $1.lowercased() }
+        
         self.collectionView.reloadData()
     }
 }
 
+
 extension TableViewCell: UICollectionViewDelegate {
     
 }
+
 
 extension TableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -57,11 +64,12 @@ extension TableViewCell: UICollectionViewDataSource {
     }
 }
 
+
 extension TableViewCell: GridLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, widthForContentAtIndexPath indexPath: IndexPath) -> CGFloat {
-        let text = skills[indexPath.row]
-        let referenceSize = CGSize(width: CGFloat.greatestFiniteMagnitude, height: self.textHeight)
-        let calculatedSize = (text as NSString).boundingRect(with: referenceSize, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: self.textHeight)], context: nil)
-        return max(calculatedSize.width, 50)
+        let text = skills[indexPath.item]
+        let referenceSize = CGSize(width: CGFloat.greatestFiniteMagnitude, height: self.fontHeight)
+        let calculatedSize = (text as NSString).boundingRect(with: referenceSize, options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: self.fontHeight)], context: nil)
+        return calculatedSize.width
     }
 }

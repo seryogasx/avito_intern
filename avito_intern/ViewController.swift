@@ -18,17 +18,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var dataArray = Array<AvitoData>()
-//    var dataArray = [AvitoData(company: Company(name: "Avito", employees: [Employee(name: "John", phone_number: "769453", skills: ["Swift", "iOS"]),
-//                                                                           Employee(name: "Diego", phone_number: "987924", skills: ["Kotlin", "Android"]),
-//                                                                           Employee(name: "Alfred", phone_number: "452533", skills: ["Objective-C", "Android", "Photoshop", "C++"]),
-//                                                                           Employee(name: "John", phone_number: "212456", skills: ["Java", "Python"]),
-//                                                                           Employee(name: "Mat", phone_number: "778975", skills: ["Android", "MovieMaker"]),
-//                                                                           Employee(name: "Bob", phone_number: "456468", skills: ["Groovy", "Kotlin"]),
-//                                                                           Employee(name: "Marty", phone_number: "321789", skills: ["Android", "PHP", "C#", /*"C++", "Python"*/])
-//    ]))]
-    
     let cellIdentifier = "TableViewCell"
-    
     var session: URLSession!
     
     override func viewDidLoad() {

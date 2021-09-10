@@ -15,7 +15,7 @@ class GridLayout: UICollectionViewLayout {
     
     weak var delegate: GridLayoutDelegate?
     private let numberOfColumns = 3
-    private let cellPadding: CGFloat = 6
+    private let cellPadding: CGFloat = 10
     private var cache: [UICollectionViewLayoutAttributes] = []
     
     private var contentHeight: CGFloat {
@@ -32,10 +32,10 @@ class GridLayout: UICollectionViewLayout {
     
     override func prepare() {
         super.prepare()
-        guard cache.isEmpty, let collectionView = collectionView else {
+        cache.removeAll()
+        guard let collectionView = collectionView else {
             return
         }
-        
         let columnHeight = contentHeight / CGFloat(numberOfColumns)
         var xOffset = Array<CGFloat>(repeating: 0, count: numberOfColumns)
         var yOffset = Array<CGFloat>()
@@ -49,7 +49,7 @@ class GridLayout: UICollectionViewLayout {
         for item in 0..<numberOfItems {
             let indexPath = IndexPath(item: item, section: 0)
             let cellWidth = delegate?.collectionView(collectionView, widthForContentAtIndexPath: indexPath) ?? 180
-            let width = cellPadding * 2 + cellWidth
+            let width = (cellPadding * 2) + cellWidth
             let frame = CGRect(x: xOffset[column], y: yOffset[column], width: width, height: columnHeight)
             let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
             

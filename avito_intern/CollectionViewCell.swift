@@ -27,7 +27,7 @@ extension UIButton {
     func setLayer() {
         UIGraphicsBeginImageContext(layer.frame.size)
 
-        let recPath = UIBezierPath(roundedRect: frame, byRoundingCorners: [.topLeft, .bottomRight, .topRight, .bottomLeft], cornerRadii: CGSize(width: 42, height: 42))
+        let recPath = UIBezierPath(roundedRect: frame, byRoundingCorners: [.topLeft, .bottomRight, .topRight, .bottomLeft], cornerRadii: CGSize(width: 10, height: 10))
         UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.1).setFill()
         recPath.fill()
         let imageBuffer = UIGraphicsGetImageFromCurrentImageContext()
