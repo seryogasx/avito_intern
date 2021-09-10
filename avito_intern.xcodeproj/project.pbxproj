@@ -18,6 +18,9 @@
 		A642FE7126E76F4000F3FE2E /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A642FE6F26E76F4000F3FE2E /* TableViewCell.xib */; };
 		A6B6495C26E90EC300B3CE08 /* TableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B6495B26E90EC300B3CE08 /* TableViewHeader.swift */; };
 		A6B6496026E90F0F00B3CE08 /* TableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6B6495F26E90F0F00B3CE08 /* TableHeaderView.xib */; };
+		A6B6496326EB777200B3CE08 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B6496126EB777200B3CE08 /* CollectionViewCell.swift */; };
+		A6B6496426EB777200B3CE08 /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6B6496226EB777200B3CE08 /* CollectionViewCell.xib */; };
+		A6B6496626EBBDDE00B3CE08 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6B6496526EBBDDE00B3CE08 /* GridLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		A642FE6F26E76F4000F3FE2E /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		A6B6495B26E90EC300B3CE08 /* TableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewHeader.swift; sourceTree = "<group>"; };
 		A6B6495F26E90F0F00B3CE08 /* TableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableHeaderView.xib; sourceTree = "<group>"; };
+		A6B6496126EB777200B3CE08 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		A6B6496226EB777200B3CE08 /* CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
+		A6B6496526EBBDDE00B3CE08 /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +84,9 @@
 				A642FE6F26E76F4000F3FE2E /* TableViewCell.xib */,
 				A6B6495B26E90EC300B3CE08 /* TableViewHeader.swift */,
 				A6B6495F26E90F0F00B3CE08 /* TableHeaderView.xib */,
+				A6B6496126EB777200B3CE08 /* CollectionViewCell.swift */,
+				A6B6496226EB777200B3CE08 /* CollectionViewCell.xib */,
+				A6B6496526EBBDDE00B3CE08 /* GridLayout.swift */,
 			);
 			path = avito_intern;
 			sourceTree = "<group>";
@@ -141,6 +150,7 @@
 			files = (
 				A642FE6526E76ADF00F3FE2E /* LaunchScreen.storyboard in Resources */,
 				A642FE7126E76F4000F3FE2E /* TableViewCell.xib in Resources */,
+				A6B6496426EB777200B3CE08 /* CollectionViewCell.xib in Resources */,
 				A642FE6226E76ADF00F3FE2E /* Assets.xcassets in Resources */,
 				A6B6496026E90F0F00B3CE08 /* TableHeaderView.xib in Resources */,
 				A642FE6026E76ADE00F3FE2E /* Main.storyboard in Resources */,
@@ -157,9 +167,11 @@
 				A6B6495C26E90EC300B3CE08 /* TableViewHeader.swift in Sources */,
 				A642FE7026E76F4000F3FE2E /* TableViewCell.swift in Sources */,
 				A642FE5D26E76ADE00F3FE2E /* ViewController.swift in Sources */,
+				A6B6496326EB777200B3CE08 /* CollectionViewCell.swift in Sources */,
 				A642FE5926E76ADE00F3FE2E /* AppDelegate.swift in Sources */,
 				A642FE5B26E76ADE00F3FE2E /* SceneDelegate.swift in Sources */,
 				A642FE6D26E76B7A00F3FE2E /* Model.swift in Sources */,
+				A6B6496626EBBDDE00B3CE08 /* GridLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

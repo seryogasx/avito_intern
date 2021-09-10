@@ -9,10 +9,24 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.delegate = self
+            tableView.dataSource = self
+        }
+    }
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var dataArray = Array<AvitoData>()
+//    var dataArray = [AvitoData(company: Company(name: "Avito", employees: [Employee(name: "John", phone_number: "769453", skills: ["Swift", "iOS"]),
+//                                                                           Employee(name: "Diego", phone_number: "987924", skills: ["Kotlin", "Android"]),
+//                                                                           Employee(name: "Alfred", phone_number: "452533", skills: ["Objective-C", "Android", "Photoshop", "C++"]),
+//                                                                           Employee(name: "John", phone_number: "212456", skills: ["Java", "Python"]),
+//                                                                           Employee(name: "Mat", phone_number: "778975", skills: ["Android", "MovieMaker"]),
+//                                                                           Employee(name: "Bob", phone_number: "456468", skills: ["Groovy", "Kotlin"]),
+//                                                                           Employee(name: "Marty", phone_number: "321789", skills: ["Android", "PHP", "C#", /*"C++", "Python"*/])
+//    ]))]
+    
     let cellIdentifier = "TableViewCell"
     
     var session: URLSession!
@@ -22,20 +36,18 @@ class ViewController: UIViewController {
         
         tableView.backgroundView = activityIndicator
         activityIndicator.hidesWhenStopped = true
-        tableView.delegate = self
-        tableView.dataSource = self
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForResource = 5
         config.timeoutIntervalForRequest = 5
         self.session = URLSession(configuration: config)
-        
         self.getData()
     }
     
     private func showAlert(title: String, message: String) {
         DispatchQueue.main.async { [weak self] in
+            self?.activityIndicator.stopAnimating()
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self?.present(alert, animated: true, completion: nil)
@@ -51,9 +63,8 @@ class ViewController: UIViewController {
         self.session.dataTask(with: url) { [weak self] (data, response, error) in
             guard error == nil, let data = data else {
                 print("Error detected! Cannot get data! \(error?.localizedDescription ?? "Empty description")")
-                self?.showAlert(title: "Bad internet", message: "Reconnect avery 5 sesonds")
+                self?.showAlert(title: "Bad internet", message: "Reconnect every 5 sesonds")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { [weak self] in
-                    self?.activityIndicator.stopAnimating()
                     self?.getData()
                 }
                 return
@@ -91,12 +102,12 @@ extension ViewController: UITableViewDelegate {
 
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.dataArray[section].company.employees.count
+        return self.dataArray[section].company.employees.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? TableViewCell else {
-            print("return default cell!")
+            print("Return default table cell!")
             return UITableViewCell()
         }
         cell.setup(employee: self.dataArray[indexPath.section].company.employees[indexPath.row])
